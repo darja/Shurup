@@ -1,0 +1,45 @@
+ext {
+    versions = [
+        support           : "27.1.1",
+        dagger            : "2.13",
+        room              : "1.0.0",
+        butterknife       : "8.8.1",
+        googlePlayServices: "15.0.0"
+    ]
+
+
+    // Support Libraries
+    support = [
+        appCompat:  "com.android.support:appcompat-v7:${versions.support}",
+        design:     "com.android.support:design:${versions.support}",
+        constraint: "com.android.support.constraint:constraint-layout:1.0.2",
+        cardView:   "com.android.support:cardview-v7:${versions.support}"
+    ]
+    supportLibraries = support.values()
+
+    // Google Play Services
+    googlePlayServices = [
+        "com.google.android.gms:play-services-location:${versions.googlePlayServices}"
+    ]
+
+    // Kotlin
+    kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Dagger
+    daggerLibraries = [
+        "com.google.dagger:dagger:${versions.dagger}",
+        "com.google.dagger:dagger-android:${versions.dagger}",
+        "com.google.dagger:dagger-android-support:${versions.dagger}"
+    ]
+    daggerCompilers = [
+        "com.google.dagger:dagger-compiler:${versions.dagger}",
+        "com.google.dagger:dagger-android-processor:${versions.dagger}"
+    ]
+
+    // Butterknife
+    butterknife = "com.jakewharton:butterknife:${versions.butterknife}"
+    butterknifeCompiler = "com.jakewharton:butterknife-compiler:${versions.butterknife}"
+
+    // EventBus
+    eventBus = 'org.greenrobot:eventbus:3.1.1'
+}

@@ -7,7 +7,6 @@ apply from: 'dependencies.gradle'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.darja.shurup"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -20,13 +19,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions "language"
+
+    productFlavors {
+        fin {
+            applicationId "com.darja.shurup.fin"
+            dimension "language"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation kotlin
     implementation supportLibraries
-    implementation googlePlayServices
+    implementation googleArch
 
     implementation daggerLibraries
     kapt daggerCompilers
@@ -35,6 +43,7 @@ dependencies {
     kapt butterknifeCompiler
 
     implementation eventBus
+    implementation yaml
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

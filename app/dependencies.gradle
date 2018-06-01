@@ -17,9 +17,9 @@ ext {
     ]
     supportLibraries = support.values()
 
-    // Google Play Services
-    googlePlayServices = [
-        "com.google.android.gms:play-services-location:${versions.googlePlayServices}"
+    // Google Architecture
+    googleArch = [
+        "android.arch.lifecycle:extensions:1.1.0"
     ]
 
     // Kotlin
@@ -42,4 +42,7 @@ ext {
 
     // EventBus
     eventBus = 'org.greenrobot:eventbus:3.1.1'
+
+    // Yaml
+    yaml = "org.yaml:snakeyaml:1.21"
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Shurup</string>
+
+    <string name="topics">Topics</string>
 </resources>

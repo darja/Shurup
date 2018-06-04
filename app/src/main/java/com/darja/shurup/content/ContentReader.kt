@@ -11,7 +11,7 @@ class ContentReader(val app: Application) {
 
         val yaml = Yaml()
         val input = res.openRawResource(R.raw.topics)
-        val root = yaml.load<HashMap<String, Array<HashMap<String, String>>>>(input)
+        val root = yaml.load<HashMap<String, ArrayList<HashMap<String, String>>>>(input)
 
         return root["topics"]!!
             .map { Topic(it) }

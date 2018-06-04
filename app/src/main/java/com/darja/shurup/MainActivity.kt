@@ -1,11 +1,12 @@
 package com.darja.shurup
 
 import android.os.Bundle
-import android.util.Log
 import com.darja.shurup.content.ContentReader
+import com.darja.shurup.ui.fragment.topics.TopicsFragment
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
+    @Suppress("ProtectedInFinal")
     @Inject
     protected lateinit var contentReader: ContentReader
 
@@ -13,7 +14,14 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        contentReader.readTopics()
-            .forEach { Log.d("Main", "Topic: ${it.title}") }
+//        contentReader.readTopics()
+//            .forEach { Log.d("Main", "Topic: ${it.title}") }
+
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, TopicsFragment())
+                .commit()
+        }
     }
 }

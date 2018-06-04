@@ -1,6 +1,8 @@
 package com.darja.shurup.model
 
-class Topic(src: HashMap<String, String>) {
+import java.io.Serializable
+
+class Topic(src: HashMap<String, String>): Serializable {
     val title = src["t"]
     val contentResId = src["s"]
 }

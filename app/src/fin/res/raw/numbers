@@ -1,0 +1,27 @@
+words:
+  - t: 0
+    o: nolla
+  - t: 1
+    o: yksi
+  - t: 2
+    o: kaksi
+  - t: 3
+    o: kolme
+  - t: 4
+    o: nelja
+  - t: 5
+    o: viisi
+  - t: 6
+    o: kuusi
+  - t: 7
+    o: seitsemän
+  - t: 8
+    o: kahdeksan
+  - t: 9
+    o: yhdeksan
+  - t: 10
+    o: kymmenen
+  - t: 11
+    o: yksitoista
+  - t: 12
+    o: kaksitoista

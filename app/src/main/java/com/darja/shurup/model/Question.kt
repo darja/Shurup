@@ -4,7 +4,7 @@ abstract class Question
 
 class OptionsQuestion(
     val label: String,
-    val options: Array<String>,
+    val options: List<String>,
     val answerIndex: Int
 ) : Question()
 

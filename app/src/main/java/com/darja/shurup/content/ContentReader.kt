@@ -18,12 +18,12 @@ class ContentReader(val app: Application) {
             .map { Topic(it) }
     }
 
-    fun readTopicContent(name: String): List<Word> {
+    fun readTopicContent(resName: String): List<Word> {
         val res = app.resources
         val yaml = Yaml()
-        val resId = res.getIdentifier(name, "raw", app.packageName)
+        val resId = res.getIdentifier(resName, "raw", app.packageName)
         val input = res.openRawResource(resId)
-        val root = yaml.load<HashMap<String, ArrayList<HashMap<String, String>>>>(input)
+        val root = yaml.load<HashMap<String, ArrayList<HashMap<String, Any>>>>(input)
 
         return root["words"]!!
             .map { Word(it) }

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
 import com.darja.shurup.R
+import com.darja.shurup.ui.events.OnTopicClick
 import com.darja.shurup.ui.fragment.BaseFragment
+import org.greenrobot.eventbus.EventBus
 
 class TopicsFragment: BaseFragment<TopicsViewModel>() {
     val view = TopicsFragmentView()
@@ -29,9 +31,14 @@ class TopicsFragment: BaseFragment<TopicsViewModel>() {
         view.onActivityCreated(activity)
 
         setupViewModelEvents()
+        setupViewEvents()
     }
 
     private fun setupViewModelEvents() {
         viewModel.getTopics().observe(this, Observer { view.showTopics(it ?: emptyList()) })
+    }
+
+    private fun setupViewEvents() {
+        view.setTopicClickListener { EventBus.getDefault().post(OnTopicClick(it)) }
     }
 }

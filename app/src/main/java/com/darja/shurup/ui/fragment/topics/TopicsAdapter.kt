@@ -13,6 +13,8 @@ import com.darja.shurup.model.Topic
 internal class TopicsAdapter: RecyclerView.Adapter<TopicsAdapter.TopicViewHolder>() {
     var topics: List<Topic>? = null
 
+    var clickListener: ((Topic) -> Any)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_topic, parent, false)
 
@@ -25,9 +27,11 @@ internal class TopicsAdapter: RecyclerView.Adapter<TopicsAdapter.TopicViewHolder
         val topic = topics?.get(position) ?: return
 
         holder.title.text = topic.title
+        holder.root.setOnClickListener { clickListener?.invoke(topic) }
     }
 
     internal class TopicViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        @BindView(R.id.root) lateinit var root: View
         @BindView(R.id.title) lateinit var title: TextView
 
         init {

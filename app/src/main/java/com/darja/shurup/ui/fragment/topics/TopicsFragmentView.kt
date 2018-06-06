@@ -22,4 +22,8 @@ class TopicsFragmentView {
         adapter.topics = topics
         adapter.notifyDataSetChanged()
     }
+
+    fun setTopicClickListener(listener: ((Topic) -> Any)?) {
+        adapter.clickListener = listener
+    }
 }

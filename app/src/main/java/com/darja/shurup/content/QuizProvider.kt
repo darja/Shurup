@@ -16,7 +16,7 @@ class QuizProvider(private val words: List<Word>) {
 
         const val OPTIONS_COUNT = 4
 
-        const val QUESTION_TYPES_COUNT = 2
+        const val QUESTION_TYPES_COUNT = 1 // todo set 2 to enable typing questions
         const val TYPE_OPTIONS = 0
         const val TYPE_TYPING = 1
 

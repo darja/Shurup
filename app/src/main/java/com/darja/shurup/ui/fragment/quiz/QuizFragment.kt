@@ -2,11 +2,17 @@ package com.darja.shurup.ui.fragment.quiz
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import butterknife.ButterKnife
+import com.darja.shurup.R
 import com.darja.shurup.model.Topic
 import com.darja.shurup.ui.fragment.BaseFragment
 
 class QuizFragment: BaseFragment<QuizViewModel>() {
+    val view = QuizFragmentView()
+
     companion object {
         private const val ARG_TOPIC = "topic"
 
@@ -25,6 +31,15 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
 
     override fun getActionBarTitle() = viewModel.getTopic()?.title ?: ""
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_quiz, container, false)
+
+        ButterKnife.bind(view, rootView)
+
+        return rootView
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,7 +53,11 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
     }
 
     private fun setupViewModelEvents() {
-        viewModel.question.observe(this, Observer { Log.d("Quiz", "Question: $it") })
+        viewModel.question.observe(this, Observer {
+            if (it != null) {
+                view.showQuestion(context, it)
+            }
+        })
     }
 
 }

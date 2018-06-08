@@ -42,6 +42,7 @@ class MainActivity : BaseActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_container, QuizFragment.newInstance(arg.topic))
+            .addToBackStack(null)
             .commit()
     }
 

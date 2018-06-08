@@ -17,6 +17,9 @@ class OptionsQuestionView(context: Context?) : LinearLayout(context) {
 
     var optionSelectedListener: ((Int) -> Unit)? = null
 
+    val optionViewsCount: Int
+        get() = childCount - 1
+
     init {
         View.inflate(context, R.layout.view_options_question, this)
         ButterKnife.bind(this)
@@ -26,31 +29,43 @@ class OptionsQuestionView(context: Context?) : LinearLayout(context) {
     fun showQuestion(q: OptionsQuestion) {
         questionView.text = q.label
 
-        while (childCount > 1) {
-            removeViewAt(1)
+        val optionsCount = q.options.size
+
+        // remove excessive option views if needed
+        while (optionViewsCount > optionsCount) {
+            removeViewAt(optionsCount)
         }
 
-        val inflater = LayoutInflater.from(context)
-        for (i in 0 until q.options.size) {
+        // add more option views if needed
+        if (optionViewsCount < optionsCount) {
+            val inflater = LayoutInflater.from(context)
+            while (optionViewsCount < optionsCount) {
+                val optionView = inflater.inflate(R.layout.inc_option, this, false) as Button
+                addView(optionView)
+            }
+        }
+
+        // bind titles
+        for (i in 0 until optionsCount) {
+            val optionView = getOptionView(i)
             val option = q.options[i]
-            val optionView = inflater.inflate(R.layout.inc_option, this, false) as Button
             optionView.text = option
             optionView.setBackgroundResource(R.drawable.bg_option)
             optionView.setOnClickListener { optionSelectedListener?.invoke(i) }
-
-            addView(optionView)
         }
     }
 
     fun showAnswer(clickedIndex: Int, correctIndex: Int) {
-        getAnswerView(correctIndex).setBackgroundResource(R.drawable.bg_option_correct)
+        getOptionView(correctIndex).setBackgroundResource(R.drawable.bg_option_correct)
 
         if (clickedIndex != correctIndex) {
-            getAnswerView(clickedIndex).setBackgroundResource(R.drawable.bg_option_incorrect)
+            getOptionView(clickedIndex).setBackgroundResource(R.drawable.bg_option_incorrect)
         }
     }
 
-    private fun getAnswerView(index: Int): View {
-        return getChildAt(index + 1)
+    private fun getOptionView(index: Int): Button {
+        return getChildAt(index + 1) as Button
     }
+
+    private fun getOptionsViewsCount() = childCount - 1
 }

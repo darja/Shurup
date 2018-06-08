@@ -5,8 +5,7 @@
        android:layout_height="match_parent"
        tools:parentTag="android.widget.LinearLayout"
        tools:orientation="vertical"
-       android:paddingLeft="@dimen/big_margin"
-       android:paddingRight="@dimen/big_margin"
+       android:padding="@dimen/big_margin"
 >
     <!-- Question -->
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -14,8 +13,7 @@
               android:text="fds"
               android:textSize="30sp"
               android:gravity="center"
-              android:layout_marginTop="@dimen/big_margin"
-              android:layout_marginBottom="@dimen/med_margin"
+              android:textColor="@android:color/black"
     />
 
     <!-- Correct answer -->

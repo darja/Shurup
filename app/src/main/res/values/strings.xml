@@ -4,4 +4,5 @@
     <string name="topics">Topics</string>
 
     <string name="hint_type_answer">Type your answer</string>
+    <string name="stat_format">%1$d : %2$d</string>
 </resources>

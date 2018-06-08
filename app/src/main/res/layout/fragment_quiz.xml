@@ -7,7 +7,12 @@
     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
               android:id="@+id/statistics"
               android:background="@color/colorAccent"
-              android:padding="@dimen/default_margin"
-              android:visibility="gone"
+              android:padding="@dimen/med_margin"
+              android:textSize="18sp"
+              android:gravity="center"
+              android:textStyle="bold"
+              android:fontFamily="monospace"
+              android:textColor="@android:color/black"
+              android:text="1:4"
     />
 </RelativeLayout>

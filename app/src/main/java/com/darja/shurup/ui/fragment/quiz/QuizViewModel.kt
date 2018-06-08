@@ -4,10 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.darja.shurup.content.ContentReader
 import com.darja.shurup.content.QuizProvider
-import com.darja.shurup.model.OptionsQuestion
-import com.darja.shurup.model.Question
-import com.darja.shurup.model.Topic
-import com.darja.shurup.model.TypingQuestion
+import com.darja.shurup.model.*
 import javax.inject.Inject
 import kotlin.concurrent.thread
 
@@ -19,7 +16,10 @@ class QuizViewModel @Inject constructor(): ViewModel() {
     private lateinit var quizProvider: QuizProvider
 
     private var topic: Topic? = null
+    private var quizStatistics = QuizStatistics()
+
     var question = MutableLiveData<Question>()
+    var statistics = MutableLiveData<QuizStatistics>()
 
     fun setTopic(topic: Topic) {
         this.topic = topic
@@ -27,6 +27,9 @@ class QuizViewModel @Inject constructor(): ViewModel() {
         thread {
             val words = contentReader.readTopicContent(topic.contentResName)
             quizProvider = QuizProvider(words)
+
+            quizStatistics.reset()
+            statistics.postValue(quizStatistics)
 
             question.postValue(quizProvider.next())
         }
@@ -37,6 +40,11 @@ class QuizViewModel @Inject constructor(): ViewModel() {
     fun getOptionsQuestion() = question.value as OptionsQuestion
 
     fun getTypingQuestion() = question.value as TypingQuestion
+
+    fun updateStatistics(isCorrect: Boolean) {
+        quizStatistics.countAnswer(isCorrect)
+        statistics.postValue(quizStatistics)
+    }
 
     fun nextQuestion() {
         question.postValue(quizProvider.next())

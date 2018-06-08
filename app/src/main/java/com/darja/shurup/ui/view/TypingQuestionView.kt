@@ -13,6 +13,7 @@ import butterknife.ButterKnife
 import com.darja.shurup.R
 import com.darja.shurup.model.TypingQuestion
 import com.darja.shurup.util.ScreenUtil
+import com.darja.shurup.util.getString
 
 @Suppress("ProtectedInFinal")
 class TypingQuestionView(context: Context?): LinearLayout(context) {
@@ -45,7 +46,7 @@ class TypingQuestionView(context: Context?): LinearLayout(context) {
 
         answerView.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                answerEnteredListener?.invoke(answerView.text.toString())
+                answerEnteredListener?.invoke(answerView.getString())
                 answerView.isEnabled = false
                 ScreenUtil.hideSoftKeyboard(activity, answerView)
                 true
@@ -55,7 +56,7 @@ class TypingQuestionView(context: Context?): LinearLayout(context) {
     }
 
     fun showAnswer(question: TypingQuestion) {
-        val typedAnswer = answerView.text.toString()
+        val typedAnswer = answerView.getString()
 
         if (typedAnswer == question.answer) {
             answerView.setBackgroundResource(R.color.correctAnswerBgr)

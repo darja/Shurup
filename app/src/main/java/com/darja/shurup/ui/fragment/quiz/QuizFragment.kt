@@ -61,16 +61,26 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
                 view.showQuestion(activity!!, it)
             }
         })
+
+        viewModel.statistics.observe(this, Observer {
+            view.showStatistics(resources, it)
+        })
     }
 
     private fun setupViewEvents() {
         view.optionSelectedListener = {
-            view.showOptionsAnswer(it, viewModel.getOptionsQuestion().correctIndex)
+            val correctIndex = viewModel.getOptionsQuestion().correctIndex
+            viewModel.updateStatistics(it == correctIndex)
+
+            view.showOptionsAnswer(it, correctIndex)
             handler.postDelayed({ viewModel.nextQuestion() }, 1000)
         }
 
         view.typingAnswerEnteredListener = {
-            view.showTypingAnswer(viewModel.getTypingQuestion())
+            val question = viewModel.getTypingQuestion()
+            viewModel.updateStatistics(it == question.answer)
+
+            view.showTypingAnswer(question)
             handler.postDelayed({ viewModel.nextQuestion() }, 2000)
         }
     }

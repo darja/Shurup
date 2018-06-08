@@ -1,5 +1,6 @@
 package com.darja.shurup.ui.view
 
+import android.app.Activity
 import android.content.Context
 import android.support.v4.content.res.ResourcesCompat
 import android.view.View
@@ -11,6 +12,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.darja.shurup.R
 import com.darja.shurup.model.TypingQuestion
+import com.darja.shurup.util.ScreenUtil
 
 @Suppress("ProtectedInFinal")
 class TypingQuestionView(context: Context?): LinearLayout(context) {
@@ -30,17 +32,22 @@ class TypingQuestionView(context: Context?): LinearLayout(context) {
         setPadding(paddingHoriz, paddingTop, paddingHoriz, 0)
     }
 
-    fun showQuestion(question: TypingQuestion) {
+    fun showQuestion(activity: Activity, question: TypingQuestion) {
         questionView.text = question.label
-        answerView.text.clear()
         correctAnswerView.visibility = View.INVISIBLE
 
+        answerView.text.clear()
         answerView.setBackgroundResource(R.drawable.bg_editor)
         answerView.setTextColor(ResourcesCompat.getColor(resources, android.R.color.black, null))
+        answerView.isEnabled = true
+        answerView.requestFocus()
+        answerView.post({ ScreenUtil.showSoftKeyboard(activity, answerView) })
 
         answerView.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 answerEnteredListener?.invoke(answerView.text.toString())
+                answerView.isEnabled = false
+                ScreenUtil.hideSoftKeyboard(activity, answerView)
                 true
             } else
                 false

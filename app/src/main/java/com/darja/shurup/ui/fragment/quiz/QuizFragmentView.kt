@@ -1,5 +1,6 @@
 package com.darja.shurup.ui.fragment.quiz
 
+import android.app.Activity
 import android.content.Context
 import android.view.View
 import android.widget.RelativeLayout
@@ -32,10 +33,10 @@ class QuizFragmentView(context: Context?) {
         }
     }
 
-    fun showQuestion(question: Question) {
+    fun showQuestion(activity: Activity, question: Question) {
         when (question) {
             is OptionsQuestion -> showOptionsQuestionView(question)
-            is TypingQuestion -> showTypingQuestionView(question)
+            is TypingQuestion -> showTypingQuestionView(activity, question)
         }
     }
 
@@ -43,7 +44,7 @@ class QuizFragmentView(context: Context?) {
 
     fun showTypingAnswer(question: TypingQuestion) = typingQuestionView.showAnswer(question)
 
-    private fun showTypingQuestionView(question: TypingQuestion) {
+    private fun showTypingQuestionView(activity: Activity, question: TypingQuestion) {
         if (typingQuestionView.parent == null && root.childCount > 1) {
             root.removeViewAt(1)
         }
@@ -51,7 +52,7 @@ class QuizFragmentView(context: Context?) {
         if (typingQuestionView.parent == null) {
             placeQuestionView(typingQuestionView)
         }
-        typingQuestionView.post { typingQuestionView.showQuestion(question) }
+        typingQuestionView.post { typingQuestionView.showQuestion(activity, question) }
     }
 
     private fun placeQuestionView(questionView: View): RelativeLayout.LayoutParams {

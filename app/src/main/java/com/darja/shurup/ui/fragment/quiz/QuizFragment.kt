@@ -25,7 +25,7 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
             val fragment = QuizFragment()
             fragment.arguments = args
 
-            return fragment;
+            return fragment
         }
     }
 
@@ -57,8 +57,8 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
 
     private fun setupViewModelEvents() {
         viewModel.question.observe(this, Observer {
-            if (it != null) {
-                view.showQuestion(it)
+            if (it != null && activity != null) {
+                view.showQuestion(activity!!, it)
             }
         })
     }

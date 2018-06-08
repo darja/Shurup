@@ -29,11 +29,12 @@
               android:textColor="@color/correctAnswerTextColor"
               android:background="@color/correctAnswerBgr"
               android:visibility="invisible"
+              android:padding="@dimen/med_margin"
     />
 
     <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
               android:id="@+id/answer"
-              android:inputType="text"
+              android:inputType="textNoSuggestions"
               android:hint="@string/hint_type_answer"
               android:imeOptions="actionDone"
               android:layout_marginTop="@dimen/default_margin"

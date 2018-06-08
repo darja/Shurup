@@ -16,7 +16,6 @@ class QuizProvider(private val words: List<Word>) {
 
         const val OPTIONS_COUNT = 5
 
-        const val QUESTION_TYPES_COUNT = 2 // todo set 2 to enable typing questions
         const val TYPE_OPTIONS = 0
         const val TYPE_TYPING = 1
 
@@ -37,7 +36,7 @@ class QuizProvider(private val words: List<Word>) {
             recentWordIndices.removeFirst()
         }
 
-        val questionType = random.nextInt(QUESTION_TYPES_COUNT)
+        val questionType = if (random.nextInt(30) % 3 == 0) TYPE_TYPING else TYPE_OPTIONS
         return when (questionType) {
             TYPE_OPTIONS -> createOptionsQuestion(wordIndex)
             TYPE_TYPING -> createTypingQuestion(wordIndex)

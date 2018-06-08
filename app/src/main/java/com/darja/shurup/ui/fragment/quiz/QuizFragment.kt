@@ -10,11 +10,10 @@ import butterknife.ButterKnife
 import com.darja.shurup.R
 import com.darja.shurup.model.Topic
 import com.darja.shurup.ui.fragment.BaseFragment
-import java.util.concurrent.TimeUnit
 
 class QuizFragment: BaseFragment<QuizViewModel>() {
-    val view = QuizFragmentView()
-    val handler = Handler()
+    private lateinit var view: QuizFragmentView
+    private val handler = Handler()
 
     companion object {
         private const val ARG_TOPIC = "topic"
@@ -37,6 +36,7 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_quiz, container, false)
 
+        view = QuizFragmentView(context)
         ButterKnife.bind(view, rootView)
 
         return rootView
@@ -58,7 +58,7 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
     private fun setupViewModelEvents() {
         viewModel.question.observe(this, Observer {
             if (it != null) {
-                view.showQuestion(context, it)
+                view.showQuestion(it)
             }
         })
     }
@@ -66,7 +66,7 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
     private fun setupViewEvents() {
         view.optionSelectedListener = {
             view.showOptionsAnswer(it, viewModel.getOptionsQuestion().correctIndex)
-            handler.postDelayed({ viewModel.nextQuestion() }, TimeUnit.SECONDS.toMillis(2) )
+            handler.postDelayed({ viewModel.nextQuestion() }, 1000)
         }
     }
 }

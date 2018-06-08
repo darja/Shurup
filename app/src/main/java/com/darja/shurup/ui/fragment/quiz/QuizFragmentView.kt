@@ -10,25 +10,25 @@ import com.darja.shurup.model.OptionsQuestion
 import com.darja.shurup.model.Question
 import com.darja.shurup.ui.view.OptionsQuestionView
 
-class QuizFragmentView {
+class QuizFragmentView(context: Context?) {
     @Suppress("ProtectedInFinal")
     @BindView(R.id.quiz_root) protected lateinit var root: RelativeLayout
 
-    var optionsQuestionView: OptionsQuestionView? = null
+    private var optionsQuestionView: OptionsQuestionView = OptionsQuestionView(context)
 
     var optionSelectedListener: ((Int) -> Unit)? = null
 
-    fun showQuestion(context: Context?, question: Question) {
-        if (root.childCount > 1) {
-            root.removeViewAt(1)
-        }
+    fun showQuestion(question: Question) {
         when (question) {
-            is OptionsQuestion -> showOptionsQuestionView(context, question)
+            is OptionsQuestion -> showOptionsQuestionView(question)
         }
     }
 
     fun showOptionsAnswer(clickedIndex: Int, correctIndex: Int) {
-        optionsQuestionView?.showAnswer(clickedIndex, correctIndex)
+        if (optionsQuestionView.parent == null && root.childCount > 1) {
+            root.removeViewAt(1)
+        }
+        optionsQuestionView.showAnswer(clickedIndex, correctIndex)
     }
 
     private fun placeQuestionView(questionView: View): RelativeLayout.LayoutParams {
@@ -43,14 +43,11 @@ class QuizFragmentView {
         return lp
     }
 
-    private fun showOptionsQuestionView(context: Context?, question: OptionsQuestion) {
-        val questionView = optionsQuestionView ?: OptionsQuestionView(context)
-        placeQuestionView(questionView)
-        questionView.optionSelectedListener = optionSelectedListener
-        questionView.post { questionView.showQuestion(question) }
-
-        if (optionsQuestionView == null) {
-            optionsQuestionView = questionView
+    private fun showOptionsQuestionView(question: OptionsQuestion) {
+        optionsQuestionView.optionSelectedListener = optionSelectedListener
+        if (optionsQuestionView.parent == null) {
+            placeQuestionView(optionsQuestionView)
         }
+        optionsQuestionView.post { optionsQuestionView.showQuestion(question) }
     }
 }

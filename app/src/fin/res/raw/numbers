@@ -8,7 +8,7 @@ words:
   - t: 3
     o: kolme
   - t: 4
-    o: nelja
+    o: neljä
   - t: 5
     o: viisi
   - t: 6
@@ -18,10 +18,88 @@ words:
   - t: 8
     o: kahdeksan
   - t: 9
-    o: yhdeksan
+    o: yhdeksän
   - t: 10
     o: kymmenen
   - t: 11
     o: yksitoista
   - t: 12
     o: kaksitoista
+  - t: 13
+    o: kolmetoista
+  - t: 14
+    o: neljätoista
+  - t: 15
+    o: viisitoista
+  - t: 16
+    o: kuusitoista
+  - t: 17
+    o: seitsemäntoista
+  - t: 18
+    o: kahdeksantoista
+  - t: 19
+    o: yhdeksäntoista
+  - t: 20
+    o: kaksikymmentä
+  - t: 21
+    o: kaksikymmentäyksi
+  - t: 22
+    o: kaksikymmentäkaksi
+  - t: 23
+    o: kaksikymmentäkolme
+  - t: 24
+    o: kaksikymmentäneljä
+  - t: 25
+    o: kaksikymmentäviisi
+  - t: 26
+    o: kaksikymmentäkuusi
+  - t: 27
+    o: kaksikymmentäseitsemän
+  - t: 28
+    o: kaksikymmentäkahdeksan
+  - t: 29
+    o: kaksikymmentäyhdeksän
+  - t: 30
+    o: kolmekymmentä
+  - t: 40
+    o: neljäkymmentä
+  - t: 50
+    o: viisikymmentä
+  - t: 60
+    o: kuusikymmentä
+  - t: 70
+    o: seitsemänkymmentä
+  - t: 80
+    o: kahdeksankymmentä
+  - t: 90
+    o: yhdeksänkymmentä
+  - t: 100
+    o: sata
+  - t: 1 000
+    o: tuhat
+  - t: 2 000
+    o: kaksituhatta
+  - t: 3 000
+    o: kolmetuhatta
+  - t: 4 000
+    o: neljätuhatta
+  - t: 5 000
+    o: viisituhatta
+  - t: 6 000
+    o: kuusituhatta
+  - t: 7 000
+    o: seitsemäntuhatta
+  - t: 8 000
+    o: kahdeksantuhatta
+  - t: 9 000
+    o: yhdeksantuhatta
+  - t: 10 000
+    o: kymmenentuhatta
+  - t: 20 000
+    o: kaksikymmenentätuhatta
+  - t: 50 000
+    o: viisikymmenentätuhatta
+  - t: 1 000 000
+    o: miljona
+  - t: 2 000 000
+    o: kaksi miljona

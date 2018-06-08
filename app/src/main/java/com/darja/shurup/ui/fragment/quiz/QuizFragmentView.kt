@@ -8,27 +8,50 @@ import butterknife.BindView
 import com.darja.shurup.R
 import com.darja.shurup.model.OptionsQuestion
 import com.darja.shurup.model.Question
+import com.darja.shurup.model.TypingQuestion
 import com.darja.shurup.ui.view.OptionsQuestionView
+import com.darja.shurup.ui.view.TypingQuestionView
 
 class QuizFragmentView(context: Context?) {
     @Suppress("ProtectedInFinal")
     @BindView(R.id.quiz_root) protected lateinit var root: RelativeLayout
 
     private var optionsQuestionView: OptionsQuestionView = OptionsQuestionView(context)
-
     var optionSelectedListener: ((Int) -> Unit)? = null
+
+    private var typingQuestionView: TypingQuestionView = TypingQuestionView(context)
+    var typingAnswerEnteredListener: ((String) -> Unit)? = null
+
+    init {
+        optionsQuestionView.optionSelectedListener = {
+            optionSelectedListener?.invoke(it)
+        }
+
+        typingQuestionView.answerEnteredListener = {
+            typingAnswerEnteredListener?.invoke(it)
+        }
+    }
 
     fun showQuestion(question: Question) {
         when (question) {
             is OptionsQuestion -> showOptionsQuestionView(question)
+            is TypingQuestion -> showTypingQuestionView(question)
         }
     }
 
-    fun showOptionsAnswer(clickedIndex: Int, correctIndex: Int) {
-        if (optionsQuestionView.parent == null && root.childCount > 1) {
+    fun showOptionsAnswer(clickedIndex: Int, correctIndex: Int) = optionsQuestionView.showAnswer(clickedIndex, correctIndex)
+
+    fun showTypingAnswer(question: TypingQuestion) = typingQuestionView.showAnswer(question)
+
+    private fun showTypingQuestionView(question: TypingQuestion) {
+        if (typingQuestionView.parent == null && root.childCount > 1) {
             root.removeViewAt(1)
         }
-        optionsQuestionView.showAnswer(clickedIndex, correctIndex)
+
+        if (typingQuestionView.parent == null) {
+            placeQuestionView(typingQuestionView)
+        }
+        typingQuestionView.post { typingQuestionView.showQuestion(question) }
     }
 
     private fun placeQuestionView(questionView: View): RelativeLayout.LayoutParams {
@@ -44,7 +67,9 @@ class QuizFragmentView(context: Context?) {
     }
 
     private fun showOptionsQuestionView(question: OptionsQuestion) {
-        optionsQuestionView.optionSelectedListener = optionSelectedListener
+        if (optionsQuestionView.parent == null && root.childCount > 1) {
+            root.removeViewAt(1)
+        }
         if (optionsQuestionView.parent == null) {
             placeQuestionView(optionsQuestionView)
         }

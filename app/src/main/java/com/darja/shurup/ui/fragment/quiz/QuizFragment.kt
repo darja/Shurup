@@ -68,5 +68,10 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
             view.showOptionsAnswer(it, viewModel.getOptionsQuestion().correctIndex)
             handler.postDelayed({ viewModel.nextQuestion() }, 1000)
         }
+
+        view.typingAnswerEnteredListener = {
+            view.showTypingAnswer(viewModel.getTypingQuestion())
+            handler.postDelayed({ viewModel.nextQuestion() }, 2000)
+        }
     }
 }

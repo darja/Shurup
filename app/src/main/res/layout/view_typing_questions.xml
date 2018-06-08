@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:parentTag="android.widget.LinearLayout"
+       tools:orientation="vertical"
+       android:paddingLeft="@dimen/big_margin"
+       android:paddingRight="@dimen/big_margin"
+>
+    <!-- Question -->
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/question"
+              android:text="fds"
+              android:textSize="30sp"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/big_margin"
+              android:layout_marginBottom="@dimen/med_margin"
+    />
+
+    <!-- Correct answer -->
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/correct_answer"
+              android:text="fds"
+              android:textSize="30sp"
+              android:gravity="center"
+              android:layout_marginTop="@dimen/med_margin"
+              android:layout_marginBottom="@dimen/med_margin"
+              android:textColor="@color/correctAnswerTextColor"
+              android:background="@color/correctAnswerBgr"
+              android:visibility="invisible"
+    />
+
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/answer"
+              android:inputType="text"
+              android:hint="@string/hint_type_answer"
+              android:imeOptions="actionDone"
+              android:layout_marginTop="@dimen/default_margin"
+              android:textSize="30sp"
+              android:gravity="center"
+              android:background="@drawable/bg_editor"
+              android:padding="@dimen/med_margin"
+    />
+</merge>

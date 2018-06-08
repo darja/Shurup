@@ -7,6 +7,7 @@ import com.darja.shurup.content.QuizProvider
 import com.darja.shurup.model.OptionsQuestion
 import com.darja.shurup.model.Question
 import com.darja.shurup.model.Topic
+import com.darja.shurup.model.TypingQuestion
 import javax.inject.Inject
 import kotlin.concurrent.thread
 
@@ -34,6 +35,8 @@ class QuizViewModel @Inject constructor(): ViewModel() {
     fun getTopic() = topic
 
     fun getOptionsQuestion() = question.value as OptionsQuestion
+
+    fun getTypingQuestion() = question.value as TypingQuestion
 
     fun nextQuestion() {
         question.postValue(quizProvider.next())

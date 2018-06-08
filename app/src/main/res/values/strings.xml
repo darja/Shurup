@@ -2,4 +2,6 @@
     <string name="app_name">Shurup</string>
 
     <string name="topics">Topics</string>
+
+    <string name="hint_type_answer">Type your answer</string>
 </resources>

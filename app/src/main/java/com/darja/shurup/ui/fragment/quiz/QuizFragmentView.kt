@@ -14,6 +14,10 @@ class QuizFragmentView {
     @Suppress("ProtectedInFinal")
     @BindView(R.id.quiz_root) protected lateinit var root: RelativeLayout
 
+    var optionsQuestionView: OptionsQuestionView? = null
+
+    var optionSelectedListener: ((Int) -> Unit)? = null
+
     fun showQuestion(context: Context?, question: Question) {
         if (root.childCount > 1) {
             root.removeViewAt(1)
@@ -21,6 +25,10 @@ class QuizFragmentView {
         when (question) {
             is OptionsQuestion -> showOptionsQuestionView(context, question)
         }
+    }
+
+    fun showOptionsAnswer(clickedIndex: Int, correctIndex: Int) {
+        optionsQuestionView?.showAnswer(clickedIndex, correctIndex)
     }
 
     private fun placeQuestionView(questionView: View): RelativeLayout.LayoutParams {
@@ -36,8 +44,13 @@ class QuizFragmentView {
     }
 
     private fun showOptionsQuestionView(context: Context?, question: OptionsQuestion) {
-        val questionView = OptionsQuestionView(context)
+        val questionView = optionsQuestionView ?: OptionsQuestionView(context)
         placeQuestionView(questionView)
+        questionView.optionSelectedListener = optionSelectedListener
         questionView.post { questionView.showQuestion(question) }
+
+        if (optionsQuestionView == null) {
+            optionsQuestionView = questionView
+        }
     }
 }

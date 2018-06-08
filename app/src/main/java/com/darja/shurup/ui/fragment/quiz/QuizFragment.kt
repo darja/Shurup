@@ -2,6 +2,7 @@ package com.darja.shurup.ui.fragment.quiz
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,11 @@ import butterknife.ButterKnife
 import com.darja.shurup.R
 import com.darja.shurup.model.Topic
 import com.darja.shurup.ui.fragment.BaseFragment
+import java.util.concurrent.TimeUnit
 
 class QuizFragment: BaseFragment<QuizViewModel>() {
     val view = QuizFragmentView()
+    val handler = Handler()
 
     companion object {
         private const val ARG_TOPIC = "topic"
@@ -39,7 +42,6 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
         return rootView
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -50,6 +52,7 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
         super.onActivityCreated(savedInstanceState)
 
         setupViewModelEvents()
+        setupViewEvents()
     }
 
     private fun setupViewModelEvents() {
@@ -60,4 +63,10 @@ class QuizFragment: BaseFragment<QuizViewModel>() {
         })
     }
 
+    private fun setupViewEvents() {
+        view.optionSelectedListener = {
+            view.showOptionsAnswer(it, viewModel.getOptionsQuestion().correctIndex)
+            handler.postDelayed({ viewModel.nextQuestion() }, TimeUnit.SECONDS.toMillis(2) )
+        }
+    }
 }

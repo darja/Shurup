@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.darja.shurup.content.ContentReader
 import com.darja.shurup.content.QuizProvider
+import com.darja.shurup.model.OptionsQuestion
 import com.darja.shurup.model.Question
 import com.darja.shurup.model.Topic
 import javax.inject.Inject
@@ -32,9 +33,9 @@ class QuizViewModel @Inject constructor(): ViewModel() {
 
     fun getTopic() = topic
 
+    fun getOptionsQuestion() = question.value as OptionsQuestion
+
     fun nextQuestion() {
-        thread {
-            question.postValue(quizProvider.next())
-        }
+        question.postValue(quizProvider.next())
     }
 }
